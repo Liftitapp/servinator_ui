@@ -58,7 +58,7 @@ ApplicationWindow {
                 }
 
                 TextField {
-                    id: service_type
+                    id: service_type_id
                     Layout.preferredWidth: width_control_widgets
                 }
 
@@ -67,16 +67,16 @@ ApplicationWindow {
                 }
 
                 TextField {
-                    id: customer
+                    id: customer_id
                     Layout.preferredWidth: width_control_widgets
                 }
 
                 Label {
-                    text: qsTr("Operator")
+                    text: qsTr("Num operators")
                 }
 
                 TextField {
-                    id: interior 
+                    id: num_operators
                     Layout.preferredWidth: width_control_widgets
                 }
             }
@@ -93,6 +93,7 @@ ApplicationWindow {
                 Button {
                     Layout.fillWidth: true
                     text: "Ok"
+		    onClicked: doExecute()
                 }
             }
         }
@@ -104,5 +105,14 @@ ApplicationWindow {
               Layout.fillHeight: true
             }
         }
+    }
+
+    function doExecute() {
+    	var service_type_id1 = parseInt(service_type_id.text)
+    	var customer_id1 = parseInt(customer_id.text)
+    	var num_operators1 = parseInt(num_operators.text)
+    	var dir = fileDialog.fileUrls[0]
+    	var token1 = token.text
+	Cli.execute(service_type_id1, customer_id1, num_operators1, dir, token1)
     }
 }
