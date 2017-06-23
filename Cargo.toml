@@ -1,0 +1,7 @@
+[package]
+name = "servinator_ui"
+version = "0.1.0"
+authors = ["Otto Jiménez <ottojimenez@gmail.com>"]
+
+[dependencies]
+qmlrs = "0.1.1"
