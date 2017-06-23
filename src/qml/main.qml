@@ -93,7 +93,7 @@ ApplicationWindow {
                 Button {
                     Layout.fillWidth: true
                     text: "Ok"
-		    onClicked: doExecute()
+        onClicked: doExecute()
                 }
             }
         }
@@ -108,11 +108,11 @@ ApplicationWindow {
     }
 
     function doExecute() {
-    	var service_type_id1 = parseInt(service_type_id.text)
-    	var customer_id1 = parseInt(customer_id.text)
-    	var num_operators1 = parseInt(num_operators.text)
-    	var dir = fileDialog.fileUrls[0]
-    	var token1 = token.text
-	Cli.execute(service_type_id1, customer_id1, num_operators1, dir, token1)
+      var service_type_id1 = parseInt(service_type_id.text)
+      var customer_id1 = parseInt(customer_id.text)
+      var num_operators1 = parseInt(num_operators.text)
+      var dir = fileDialog.fileUrls[0]
+      var token1 = token.text
+      Cli.execute(service_type_id1, customer_id1, num_operators1, dir, token1)
     }
 }

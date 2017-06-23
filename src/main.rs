@@ -7,25 +7,34 @@ extern crate qmlrs;
 
 struct Cli;
 impl Cli {
-    fn execute(&self, service_type_id: i64, customer_id: i64, num_operators: i64, dir: String, token: String) -> String {
-        let config = structs::Config{
-            url: String::from(""),
+    fn execute(&self,
+               service_type_id: i64,
+               customer_id: i64,
+               num_operators: i64,
+               dir: String,
+               token: String)
+               -> String {
+        let config = structs::Config {
+            url: String::from("http://localhost:4000/v1/service"),
             token: token,
             service_type_id: service_type_id as i32,
             customer_id: customer_id as i32,
-            operators: num_operators as i32
+            operators: num_operators as i32,
         };
 
-        let data = structs::Data{
-            dir: dir,
-            config: None
+        let data = structs::Data {
+            dir: dir.to_owned().split_off(7),
+            config: None,
         };
 
         println!("Algo paso por aquí");
 
         match runner::run_with_config(&data, &config) {
             Ok(_) => String::from("Ok"),
-            Err(_) => String::from("Falló")
+            Err(e) => {
+                println!("{:?}", e);
+                String::from("Falló")
+            }
         }
     }
 }
@@ -37,8 +46,7 @@ Q_OBJECT! { Cli:
 fn main() {
     let mut engine = qmlrs::Engine::new();
     engine.set_property("Cli", Cli);
-    
+
     engine.load_local_file("src/qml/main.qml");
     engine.exec();
 }
-
